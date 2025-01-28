@@ -3,7 +3,11 @@
   "module": "index.ts",
   "type": "module",
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bcrypt": "^5.0.2",
+    "@types/bun": "latest",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.8"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
@@ -16,6 +20,7 @@
     "http-status": "^2.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.5",
-    "viem": "^2.22.10"
+    "viem": "^2.22.10",
+    "winston": "^3.17.0"
   }
 }
