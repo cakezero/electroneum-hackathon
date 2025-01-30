@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import certOwner from "../models/certOwner";
 import logger from "../configs/logger";
 import httpStatus from "http-status"
+import certificateModel from "../models/certificateSchema";
 
 const creatorRegister = async (req: Request, res: Response) => { 
   try {
@@ -25,7 +26,7 @@ const creatorRegister = async (req: Request, res: Response) => {
     req.body.password = hashedPassword;
 
     const newCreator = new certOwner(req.body);
-    newCreator.save();
+    await newCreator.save();
     res.status(httpStatus.CREATED).json({ message: "Creator registered", userInfo: newCreator });
   } catch (error: any) {
     logger.error(`Error creating creator: ${error.message}`);
@@ -56,7 +57,18 @@ const creatorLogin = async (req: Request, res: Response) => {
 
 const dashboard = async (req: Request, res: Response) => { 
   try {
-    
+    const { username } = req.query;
+    const user = await certOwner.findOne({ username });
+    if (!user) {
+      res.status(httpStatus.NOT_FOUND).json({ error: "User not found" });
+      return;
+    }
+    const dashboardInfo = await certificateModel.find({ owner: username })
+    if (!dashboardInfo) {
+      res.status(httpStatus.OK).json({ message: "Nothing found" });
+      return;
+    }
+    res.status(httpStatus.OK).json({ message: "Dashboard information sent", dashboardInfo });
   } catch (error: any) {
     logger.error(`Error getting dashboard info: ${error.message}`);
     res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ error: "Internal server error" });

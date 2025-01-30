@@ -10,4 +10,10 @@ const ENVIRONMENT = process.env.NODE_ENV || "development";
 
 const JWT_SECRET = process.env.JWT_SECRET || "secret";
 
-export { PORT, DB_URI, ENVIRONMENT, JWT_SECRET };
+const EMAIL_SERVICE = process.env.EMAIL_SERVICE;
+
+const EMAIL_USER = process.env.EMAIL_USER;
+
+const EMAIL_PASSWORD = process.env.EMAIL_PASSWORD;
+
+export { PORT, DB_URI, ENVIRONMENT, JWT_SECRET, EMAIL_PASSWORD, EMAIL_USER, EMAIL_SERVICE };

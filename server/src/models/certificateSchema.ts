@@ -18,6 +18,9 @@ const certificateSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  users: [{
+    type: String
+  }],
   owner: {
     type: String,
     required: true
